@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: container
-          image: 'podman pull quay.io/hemanth22/restapi:feature_logger'
+          image: 'quay.io/hemanth22/restapi:feature_logger'
           ports:
             - containerPort: 8080
               protocol: TCP
