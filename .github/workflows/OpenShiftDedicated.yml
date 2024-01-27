@@ -37,10 +37,9 @@ jobs:
 
       - name: Openshift Deployment
         run: |
-          ./oc login -u "$OPENSHIFT_USERNAME" -p "$OPENSHIFT_PASSWORD" "$OPENSHIFT_SERVER"
+          ./oc login --token="$OPENSHIFT_PASSWORD" --server="$OPENSHIFT_SERVER"
           ./oc project
           ./oc create -f ./deployment.yaml
         env: 
-          OPENSHIFT_USERNAME: ${{ secrets.OPENSHIFT_USERNAME }}
           OPENSHIFT_PASSWORD: ${{ secrets.OPENSHIFT_PASSWORD }}
           OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
