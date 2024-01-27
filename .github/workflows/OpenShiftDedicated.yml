@@ -39,7 +39,9 @@ jobs:
         run: |
           ./oc login --token="$OPENSHIFT_PASSWORD" --server="$OPENSHIFT_SERVER"
           ./oc project
-          ./oc create -f ./deployment.yaml
+          ./oc create -f ./deployment_fastapi.yaml
+          ./oc create -f ./services_fastapi.yaml
+          ./oc create -f ./routes_fastapi.yaml
         env: 
           OPENSHIFT_PASSWORD: ${{ secrets.OPENSHIFT_PASSWORD }}
           OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
