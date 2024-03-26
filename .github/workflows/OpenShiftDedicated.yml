@@ -40,9 +40,10 @@ jobs:
           ./oc login --token="$OPENSHIFT_PASSWORD" --server="$OPENSHIFT_SERVER"
           ./oc project
           ./oc create -f ./batchjob_python.yaml
-          ./oc get batchjobs
-          ./oc logs batchjobs/pythonbatchjob
-          ./oc get batchjobs
+          ./oc get jobs
+          ./oc logs jobs/pythonbatchjob
+          sleep 10
+          ./oc logs jobs/pythonbatchjob
         env: 
           OPENSHIFT_PASSWORD: ${{ secrets.OPENSHIFT_PASSWORD }}
           OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
