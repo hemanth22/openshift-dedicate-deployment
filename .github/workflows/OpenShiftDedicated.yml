@@ -39,6 +39,7 @@ jobs:
         run: |
           ./oc login --token="$OPENSHIFT_PASSWORD" --server="$OPENSHIFT_SERVER"
           ./oc project
+          ./oc delete -f ./batchjob_python.yaml
           ./oc create -f ./batchjob_python.yaml
           ./oc get jobs
           ./oc logs jobs/pythonbatchjob
