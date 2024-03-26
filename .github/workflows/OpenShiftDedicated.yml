@@ -41,10 +41,12 @@ jobs:
           ./oc project
           ./oc delete -f ./batchjob_python.yaml
           ./oc create -f ./batchjob_python.yaml
+          sleep 30
           ./oc get jobs
-          ./oc logs jobs/pythonbatchjob
+          sleep 30
+          ./oc logs jobs pythonbatchjob
           sleep 10
-          ./oc logs jobs/pythonbatchjob
+          ./oc logs jobs pythonbatchjob
         env: 
           OPENSHIFT_PASSWORD: ${{ secrets.OPENSHIFT_PASSWORD }}
           OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
