@@ -1,0 +1,33 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pythonbatchjob
+  namespace: bitroid-dev
+spec:
+  selector: {}
+  template:
+    metadata:
+      name: pythonbatchjob
+    spec:
+      containers:
+        - name: pythonbatchjob
+          image: quay.io/hemanth22/python_batchjob:job
+          imagePullPolicy: Always
+          env:
+            - name: SMTP_URL_FINAL
+              valueFrom:
+                secretKeyRef:
+                  name: gmail-transfer
+                  key: SMTP_URL_FINAL
+            - name: SMTP_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: gmail-transfer
+                  key: SMTP_PORT
+            - name: API_KEY_HELPER
+              valueFrom:
+                secretKeyRef:
+                  name: gmail-transfer
+                  key: API_KEY_HELPER
+      restartPolicy: Never
+  backoffLimit: 4

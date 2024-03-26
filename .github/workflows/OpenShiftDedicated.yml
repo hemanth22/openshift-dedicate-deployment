@@ -6,9 +6,9 @@ name: CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ "batchjob" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "batchjob" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -39,9 +39,10 @@ jobs:
         run: |
           ./oc login --token="$OPENSHIFT_PASSWORD" --server="$OPENSHIFT_SERVER"
           ./oc project
-          ./oc create -f ./deployment_fastapi.yaml
-          ./oc create -f ./services_fastapi.yaml
-          ./oc create -f ./routes_fastapi.yaml
+          ./oc create -f ./batchjob_python.yaml
+          ./oc get batchjobs
+          ./oc logs batchjobs/pythonbatchjob
+          ./oc get batchjobs
         env: 
           OPENSHIFT_PASSWORD: ${{ secrets.OPENSHIFT_PASSWORD }}
           OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
