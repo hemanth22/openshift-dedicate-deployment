@@ -31,19 +31,27 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: verify openshift client version
         run: |
+          echo "[Github Task 1] Untar oc cli"
           tar -xvf oc.tar
+          echo "[Github Task 2] Openshift cli version"
           ./oc version
           ls -ltr
 
       - name: Openshift Deployment
         run: |
+          echo "[Github Task 1] Openshift login"
           ./oc login --token="$OPENSHIFT_PASSWORD" --server="$OPENSHIFT_SERVER"
+          echo "[Github Task 2] Openshift fetch projects"
           ./oc project
+          echo "[Github Task 3] Delete existing deployed batchjob"
           ./oc delete -f ./batchjob_python.yaml
+          echo "[Github Task 4] Deployment of batchjob"
           ./oc create -f ./batchjob_python.yaml
           sleep 30
+          echo "[Github Task 5] Openshift CLI get batchjobs"
           ./oc get jobs
           sleep 60
+          echo "[Github Task 6] Openshift CLI get logs batchjobs"
           ./oc logs jobs/pythonbatchjob
           sleep 10
           ./oc get jobs
