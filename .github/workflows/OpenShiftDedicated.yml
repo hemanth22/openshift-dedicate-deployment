@@ -55,6 +55,7 @@ jobs:
           ./oc logs jobs/pythonbatchjob
           sleep 10
           ./oc get jobs
+          echo "[Github Task 6] Openshift CLI logout"
           ./oc logout
         env: 
           OPENSHIFT_PASSWORD: ${{ secrets.OPENSHIFT_PASSWORD }}
